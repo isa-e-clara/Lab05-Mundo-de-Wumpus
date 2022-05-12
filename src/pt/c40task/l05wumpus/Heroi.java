@@ -1,5 +1,6 @@
 package pt.c40task.l05wumpus;
 
-public class Heroi {
+public class Heroi extends Componente{
+
 
 }
