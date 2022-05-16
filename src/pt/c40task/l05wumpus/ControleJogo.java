@@ -33,7 +33,7 @@ public class ControleJogo {
 	
 	//move para a posicao x, y
 	public void move(int x, int y, int xAnt, int yAnt) {
-		if (caverna.ehValida(x, y)) {
+		if (caverna.ehValida(x, y)) { 
 			//adicionar hierarquia de aparicao de componentes
 			tabuleiro[x-1][y-1] = (caverna.getMatriz())[x-1][y-1];
 		}

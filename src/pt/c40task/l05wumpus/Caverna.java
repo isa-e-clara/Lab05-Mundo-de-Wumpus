@@ -13,6 +13,25 @@ public class Caverna {
 	
 	public Caverna () {
 		this.caverna = new Sala[4][4];
+		for(int i = 0; i < 4; i++)
+			for(int j = 0; j < 4; j++)
+				caverna[i][j] = new Sala(i, j);
+	}
+	
+	public void conectaComponenteSala(int x, int y, Componente componente) {
+		char tipo = componente.getTipo();
+		if(tipo == 'P') //ao inves de varios if da pra criar um metodo pra cada
+			caverna[y][x].conectaHeroi(componente);
+		else if(tipo == 'B')
+			caverna[y][x].conectaBuraco(componente);
+		else if(tipo == 'f')
+			caverna[y][x].conectaFedor(componente);
+		else if(tipo == 'W')
+			caverna[y][x].conectaWumpus(componente);
+		else if(tipo == 'b')
+			caverna[y][x].conectaBrisa(componente);
+		else
+			caverna[y][x].conectaOuro(componente);
 	}
 	
 	public boolean ehValida(int x, int y) {
@@ -21,19 +40,10 @@ public class Caverna {
 			return true;
 		return false;
 	}
+
 	
-	public void monta(int x, int y, char componente) {
-		if (componente == 'P') {
-			heroi = new Heroi();
-			if (ehValida(x,y) && x == 1 && y == 1)
-				matriz[x-1][y-1] = componente;
-				caverna[x-1][y-1].adiciona(heroi);
-		}
-		//contar quantos wumpus, buracos e ouros aparecem e ver se esta dentro do pedido
-		//adicionar fedor e brisa tbm
-		//fazer um if para ver qual é a letra
-		//passar para a sala o componente dela (se houver)
-		//caverna[x][y].addcomponente
+	public void alteraMatriz(int i, int j, char tipo) {
+			matriz[i][j] = tipo;
 	}
 	
 	public char[][] getMatriz() {

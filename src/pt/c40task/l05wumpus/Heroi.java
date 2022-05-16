@@ -1,23 +1,28 @@
 package pt.c40task.l05wumpus;
 
 public class Heroi extends Componente {
-	private boolean flecha;
-	private boolean vivo;
 	
-	public Heroi() {
-		flecha = true;
+	public Heroi(int x, int y) {
+		super(x, y, 'P');
 	}
-	public boolean getFlecha() {
-		return flecha;
-	}
-	public void atirou() {
-		flecha = false;
-	}
-	public boolean getVivo() {
-		return vivo;
-	}
-	public void morreu() {
-		vivo = false;
-	}
+
+
+//por mim a gnt tira tudo isso:
+	
+//	public boolean getFlecha() {
+//		return flecha;
+//	}
+	
+//	public void atirou() {
+//		flecha = false;
+//	}
+	
+//	public boolean getVivo() {
+//		return vivo;
+//	}
+	
+//	public void morreu() {
+//		vivo = false;
+//	}
 	
 }
