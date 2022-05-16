@@ -6,23 +6,4 @@ public class Heroi extends Componente {
 		super(x, y, 'P');
 	}
 
-
-//por mim a gnt tira tudo isso:
-	
-//	public boolean getFlecha() {
-//		return flecha;
-//	}
-	
-//	public void atirou() {
-//		flecha = false;
-//	}
-	
-//	public boolean getVivo() {
-//		return vivo;
-//	}
-	
-//	public void morreu() {
-//		vivo = false;
-//	}
-	
 }

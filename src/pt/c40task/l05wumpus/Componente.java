@@ -24,15 +24,27 @@ public class Componente {
 	public void conectaCaverna(Caverna caverna) {
 		this.caverna = caverna;
 	}
+	
+	public void usouArtefato() {
+		temArtefato = false;
+	}
+	
+	public boolean getArtefato() {
+		return temArtefato;
+	}
+	
+	public void setExiste() {
+		existe = false;
+	}
+	
+	public boolean getExiste() {
+		return existe;
+	}
 
 	public char getTipo() {
 		return tipo;
 	}
-
-
-	//fazer um get tipo que diz qual componente ele é
+	
 	//a classe componente nao precisa ter atributo, so os metodos (que recuperam os atributos)
-	//boolean existe para wumpus, heroi e ouro
-	//boolean tem artefato para a flecha do heroi 
 	
 }

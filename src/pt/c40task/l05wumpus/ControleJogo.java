@@ -5,7 +5,7 @@ public class ControleJogo {
 	private Caverna caverna;
 	private String player;
 	private char status;
-	
+	//matriz que vai sendo revelada de acordo com a movimentação do heroi
 	private char[][] tabuleiro = {{'p', '-', '-', '-'}, 
 			   				      {'-', '-', '-', '-'},
 			   				      {'-', '-', '-', '-'},
@@ -33,11 +33,6 @@ public class ControleJogo {
 	
 	//move para a posicao x, y
 	public void move(int x, int y, int xAnt, int yAnt) {
-		if (caverna.ehValida(x, y)) { 
-			//adicionar hierarquia de aparicao de componentes
-			tabuleiro[x-1][y-1] = (caverna.getMatriz())[x-1][y-1];
-		}
-		//adicionar hashtag se ja foi visitado e nao tem nenhum componente lá
-		//if ()
+		//tenho q fazer essa funcao ainda kk kk k kk k  HELP
 	}
 }

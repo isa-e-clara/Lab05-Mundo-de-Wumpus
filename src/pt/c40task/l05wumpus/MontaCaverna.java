@@ -15,6 +15,15 @@ public class MontaCaverna {
 		return caverna;
 	}
 	
+	public void adicionaAoRedor(int x, int y, char tipo) {
+		//chamada para wumpus para adicionar o fedor e pelo buraco para adicionar a brisa
+		//tenta adicionar nas 4 células adjacentes
+		adicionarComponente (x+1, y, tipo);
+		adicionarComponente (x-1, y, tipo);
+		adicionarComponente (x, y+1, tipo);
+		adicionarComponente (x, y-1, tipo);
+	}
+	
 	public void adicionarComponente(int x, int y, char tipo) {
 		Componente componente = null;
 		if (tipo == 'P') 
@@ -27,31 +36,51 @@ public class MontaCaverna {
 			componente = new Wumpus(x, y);
 		else if(tipo == 'b')
 			componente = new Brisa(x, y);
-		else
+		else if (tipo == 'O')
 			componente = new Ouro(x, y);
 				
 				
-		if (caverna.ehValida(x,y) && x == 1 && y == 1) { //nao entendi esse && x == 1 && y == 1
-			caverna.alteraMatriz(x-1, y-1, tipo);
+		if (caverna.ehValida(x,y)) { 
+			//hierarquia das aparições na matriz
+			// Ouro = Buraco = Wumpus > Herói > Fedor > Brisa
+			if (caverna.getMatriz()[x][y] != 'W' && caverna.getMatriz()[x][y] != 'O' && caverna.getMatriz()[x][y] != 'B') {
+				if (tipo == 'P')
+					caverna.alteraMatriz(x, y, tipo);
+				else if (tipo == 'f' && caverna.getMatriz()[x][y] != 'P')
+					caverna.alteraMatriz(x, y, tipo);
+				else if (tipo == 'b' && caverna.getMatriz()[x][y] != 'f' && caverna.getMatriz()[x][y] != 'P')
+					caverna.alteraMatriz(x, y, tipo);
+			}
+			
 			componente.conectaCaverna(caverna);
 			componente.getCaverna().conectaComponenteSala(x, y, componente);
+			if (tipo == 'W') 
+				adicionaAoRedor(x, y, 'f');
+		
+			else if (tipo == 'B')
+				adicionaAoRedor(x, y, 'b');
 		}
 		
-		//Os Componentes primários (buraco e wumpus) que possuem componentes secundários associados a eles (brisa e fedor), são responsáveis por criar objetos referentes a esses componentes
 		
 		//contar quantos wumpus, buracos e ouros aparecem e ver se esta dentro do pedido. Isso n fica melhor no montaCaverna?
-		//adicionar fedor e brisa tbm
-		//fazer um if para ver qual é a letra
+		//fiz aqui mesmo e conferi la no final (na 1 função q vai rodar), ve se concorda
+		
 		//passar para a sala o componente dela (se houver) -> fiz a função conectaComponenteSala, ajuda nisso
+		//braba!!!!!!!!
 	}
 	
 	public void montar() {
 		for (int i=0 ; i<commands.length ; i++) {
-			x = Integer.parseInt(commands[i].substring(0, 1));
-			y = Integer.parseInt(commands[i].substring(2, 3));
+			//amiga eu já coloquei aqui o x e y com o valor -1, acho q vai dar bommmm n precisa mudar mais nada
+			x = Integer.parseInt(commands[i].substring(0, 1))-1;
+			y = Integer.parseInt(commands[i].substring(2, 3))-1;
 			tipo = commands[i].charAt(4);
 			adicionarComponente(x, y, tipo);
 		}	
+		//checar se caverna é valida
+		//depois temos que parar de rodar o código se nao for
+		if (caverna.cavernaValida() == false)
+			System.out.println("Caverna Inválida");
 	}
 	
 }
