@@ -1,18 +1,20 @@
 package pt.c40task.l05wumpus;
 
 public class MontaCaverna {
-	private Sala[][] caverna;
 	private String[] commands;
+	private Caverna caverna;
+	int x, y;
+	char componente;
 	
 	public MontaCaverna(String[] commands) {
-		this.caverna = new Sala[4][4];
 		this.commands = commands;
+		for (int i=0;i<commands.length;i++) {
+			x = Integer.parseInt(commands[i].substring(0, 1));
+			y = Integer.parseInt(commands[i].substring(2, 3));
+			componente = commands[i].charAt(4);
+			caverna.monta(x,y,componente);
+		}
 	}
 	
-	public void monta() {
-		//fazer um if para ver qual é a letra
-		//passar para a sala o componente dela (se houver)
-		//caverna[x][y].addcomponente
-	}
 	
 }
