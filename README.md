@@ -8,4 +8,4 @@
 * `Engenharia da Computação`
 
 # RA
-* `247021 e XXXXXX`
+* `247021 e 234618`
