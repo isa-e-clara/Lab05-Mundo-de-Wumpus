@@ -16,6 +16,7 @@ public class MontaCaverna {
 			caverna.monta(x,y,componente);
 		}
 	}
+	
 	public Caverna getCaverna() {
 		return caverna;
 	}
