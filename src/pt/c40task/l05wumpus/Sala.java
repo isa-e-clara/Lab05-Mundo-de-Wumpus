@@ -14,7 +14,7 @@ public class Sala {
 		else
 			return false;
 	}*/
-	
+
 	public void adiciona (Componente componente) {
 		
 	}

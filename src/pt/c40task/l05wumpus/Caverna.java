@@ -1,8 +1,15 @@
 package pt.c40task.l05wumpus;
 
 public class Caverna {
+	private int nBuracos, wumpus;
 	private Sala[][] caverna;
 	private Heroi heroi;
+	//matriz que vai sendo revelada a medida que o 
+	private char[][] matriz = {{'-', '-', '-', '-'}, 
+							   {'-', '-', '-', '-'},
+							   {'-', '-', '-', '-'},
+							   {'-', '-', '-', '-'}};
+	
 	
 	public Caverna () {
 		this.caverna = new Sala[4][4];
@@ -12,18 +19,24 @@ public class Caverna {
 		//checa se eh uma posição valida da caverna
 		if (x < 5 && x > 0 && y < 5 && y > 0)
 			return true;
-		else
-			return false;
+		return false;
 	}
 	
 	public void monta(int x, int y, char componente) {
 		if (componente == 'P') {
 			heroi = new Heroi();
 			if (ehValida(x,y))
-				caverna[x][y].adiciona(heroi);
+				matriz[x-1][y-1] = componente;
+				caverna[x-1][y-1].adiciona(heroi);
 		}
+		//adicionar fedor e brisa tbm
 		//fazer um if para ver qual é a letra
 		//passar para a sala o componente dela (se houver)
 		//caverna[x][y].addcomponente
 	}
+	
+	public char[][] getMatriz() {
+		return matriz;
+	}
+	
 }
