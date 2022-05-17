@@ -5,7 +5,7 @@
 * `Clara Mattos Medeiros e Isabella Ribeiro Rigue`
 
 # Curso
-* `Engenharia da Computação`
+* `Engenharia de Computação`
 
 # RA
 * `247021 e 234618`

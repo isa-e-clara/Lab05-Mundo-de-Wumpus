@@ -15,11 +15,30 @@ public class Sala {
 		this.ouro = null;	
 	}
 	
-
-	public void adiciona (Componente componente) {
-		
+	public Componente getFedor() {
+		return fedor;
 	}
-	
+
+	public Componente getBrisa() {
+		return brisa;
+	}
+
+	public Componente getWumpus() {
+		return wumpus;
+	}
+
+	public Componente getBuraco() {
+		return buraco;
+	}
+
+	public Componente getOuro() {
+		return ouro;
+	}
+
+	public void setOuro(Componente ouro) {
+		this.ouro = ouro;
+	}
+
 	public void conectaHeroi(Componente heroi) {
         this.heroi = heroi;
     }
