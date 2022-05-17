@@ -1,10 +1,10 @@
 package pt.c40task.l05wumpus;
+import java.util.Random;
 
 public class Caverna {
 	private int nBuracos, nWumpus, nOuro, nHeroi;
 	private boolean estaEquipada, podeSair;
 	private Sala[][] salas;
-	private int pontuacao = 0;
 	//private Heroi heroi;
 	//matriz pronta com todos os elementos da caverna 
 	//gabarito, tem todas as posições de todos os componentes, menos do 
@@ -112,6 +112,20 @@ public class Caverna {
 		return false;
 	}
 
+	public void tiraFedor (int x, int y) { //tira o fedor
+		if (ehValida(x,y)) {
+			salas[x][y].setFedor(null); 
+			salas[x][y].getFedor().existe = false;
+		}
+	}
+	
+	public void tiraAoRedor(int x, int y) {
+		tiraFedor(x+1, y);
+		tiraFedor(x-1, y);
+		tiraFedor(x, y+1);
+		tiraFedor(x, y-1);
+	}
+	
 	public void alteraMatriz(int i, int j, char tipo) {
 			matriz[i][j] = tipo;
 	}
@@ -125,29 +139,64 @@ public class Caverna {
 			podeSair = true; //se coletar o ouro, o heroi pode sair
 			salas[x][y].setOuro(null); //o ouro deixa de existir
 			salas[x][y].getOuro().existe = false; //o ouro deixa de existir
-			matriz[x][y] = '-';
+			System.out.println("Ouro capturado :)");
 		}	
 	}
 	
-	public void moverHeroi(int antigoX, int antigoY, int novoX, int novoY) {
+	public int moverHeroi(int antigoX, int antigoY, int novoX, int novoY) {
 		char componenteSalaNova = salas[novoX][novoY].prioridade();
-		
+		int pontuacao = 0;
 		pontuacao -= 15; //- 15 pontos para cada movimento do herói na caverna;
-
-		tabuleiro[antigoX][antigoY] = salas[antigoX][antigoY].prioridade();
-		//matar o wumpus aqui ou morrer cair no buraco
-		if(componenteSalaNova == 'W') {
-			
-		} else {
-			if(estaEquipada) {
-				salas[novoX][novoY].getHeroi().usouArtefato();	
-				
-			}
-				
-		}
-		
-		
-		//tabuleiro[novoX][novoY] = 
-	}
+		Random rand = new Random();
 	
+		tabuleiro[antigoX][antigoY] = salas[antigoX][antigoY].prioridade(); //reescrevendo a sala da qual o heroi saiu
+		
+		if(novoX == 1 && novoY == 1 && podeSair)  //ganhou!
+			pontuacao += 1000;
+		
+		if(componenteSalaNova == 'W') { //encontrou com o Wumpus
+			
+			if(estaEquipada) { //atirou
+				int aleatorio = rand.nextInt(2);
+				
+				if (aleatorio == 1) { //matou
+					pontuacao += 500;
+					salas[novoX][novoY].setWumpus(null); //o wumpus deixa de existir
+					salas[novoX][novoY].getWumpus().existe = false; //o wumpus deixa de existir
+					tiraAoRedor(novoX, novoY); //tira o fedor do wumpus
+					System.out.println("O Wumpus morreu!!!!!");
+					
+				} else { //morreu
+					pontuacao -= 1000;
+				}
+				pontuacao -= 100; //por ter atirado
+				salas[novoX][novoY].getHeroi().usouArtefato();	
+				estaEquipada = false;
+				
+			} else 
+				pontuacao -= 1000; //se  o heroi não tiver equipado a flecha, morre direto
+			
+				
+		} else {
+			if(estaEquipada) { //está equipada e não encontrou o Wumpus
+				salas[novoX][novoY].getHeroi().usouArtefato();	
+				estaEquipada = false;
+				pontuacao -= 100;	
+			}
+			if(componenteSalaNova == 'B') //se for um buraco
+				pontuacao -= 1000;
+	
+		}
+		if (salas[novoX][novoY].getFedor() != null) //entrou numa sala com fedor 
+			System.out.println("Hmmmm... Que cheiro ruim!");
+		if (salas[novoX][novoY].getBrisa() != null) //entrou numa sala com brisa
+			System.out.println("Estou sentindo uma brisa...");
+
+	
+		tabuleiro[novoX][novoY] = salas[novoX][novoY].prioridade();
+		return pontuacao;
+	
+	}
+
+
 }

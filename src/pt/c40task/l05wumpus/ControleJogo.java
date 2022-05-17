@@ -28,6 +28,26 @@ public class ControleJogo {
 		return status;
 	}
 	
+	public void imprime(String player) {
+		char[][] matriz = heroi.getCaverna().getMatriz();
+		for (int i=0; i<matriz.length;i++) {
+			for (int j=0;j<matriz[i].length;j++)
+				System.out.printf("%c ", matriz[i][j]);
+			System.out.println();
+		}
+		
+		System.out.println("Player: " + player);
+		System.out.println("Score: " + String.valueOf(pontuacao));
+		if (status == 'W')
+			System.out.println("Parabens! Voce ganhou :)");
+		else if (status == 'L')
+			System.out.println("Ops... Nao foi dessa vez. Voce perdeu :(");
+		else if (status == 'Q')
+			System.out.println("Volte sempre!");
+		else 
+			System.out.println("Continue em frente!");
+	}
+	
 	public void mover(char move) {
 		int novoX = heroi.getX(), novoY = heroi.getY();
         if(move == 'd')
@@ -47,8 +67,16 @@ public class ControleJogo {
     		
     		heroi.getCaverna().getSala(heroi.getX(), heroi.getY()).setHeroi(heroi);
     		
-        	heroi.getCaverna().moverHeroi(antigoX, antigoY ,novoX, novoY);;
-        	pontuacao -= 15; //- 15 pontos para cada movimento do herói na caverna;
+    		int pontuacaoTemporaria = heroi.getCaverna().moverHeroi(antigoX, antigoY ,novoX, novoY);
+    		// prestar atencao nas pontuacoes
+    		if (pontuacaoTemporaria == 975)
+    			status = 'W';
+    		else if (pontuacaoTemporaria == -1015 || pontuacaoTemporaria == -1115) {
+    			status = 'L';
+    			heroi.setExiste();
+    		}
+        	pontuacao += pontuacaoTemporaria;
+        	
         }
 	}
 	

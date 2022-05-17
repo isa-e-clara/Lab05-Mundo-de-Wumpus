@@ -40,6 +40,14 @@ public class Sala {
 		return brisa;
 	}
 
+	public void setFedor(Componente fedor) {
+		this.fedor = fedor;
+	}
+
+	public void setWumpus(Componente wumpus) {
+		this.wumpus = wumpus;
+	}
+
 	public Componente getWumpus() {
 		return wumpus;
 	}
