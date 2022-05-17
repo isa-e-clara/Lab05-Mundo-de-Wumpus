@@ -8,15 +8,11 @@ public class Caverna {
 	//private Heroi heroi;
 	//matriz pronta com todos os elementos da caverna 
 	//gabarito, tem todas as posições de todos os componentes, menos do 
-	private char[][] matriz = {{'-', '-', '-', '-'}, 
+	private char[][] matriz = {{'P', '-', '-', '-'}, 
 							   {'-', '-', '-', '-'},
 							   {'-', '-', '-', '-'},
 							   {'-', '-', '-', '-'}};
-	//matriz que vau sendo revelada a medida que o jogador joga
-	private char[][] tabuleiro = {{'P', '-', '-', '-'}, 
-			      				  {'-', '-', '-', '-'},
-			      				  {'-', '-', '-', '-'},
-			      				  {'-', '-', '-', '-'}};
+
 	
 	public Sala getSala(int x, int y) {
 		return salas[x][y];
@@ -149,7 +145,7 @@ public class Caverna {
 		pontuacao -= 15; //- 15 pontos para cada movimento do herói na caverna;
 		Random rand = new Random();
 	
-		tabuleiro[antigoX][antigoY] = salas[antigoX][antigoY].prioridade(); //reescrevendo a sala da qual o heroi saiu
+		matriz[antigoX][antigoY] = salas[antigoX][antigoY].prioridade(); //reescrevendo a sala da qual o heroi saiu
 		
 		if(novoX == 1 && novoY == 1 && podeSair)  //ganhou!
 			pontuacao += 1000;
@@ -193,7 +189,7 @@ public class Caverna {
 			System.out.println("Estou sentindo uma brisa...");
 
 	
-		tabuleiro[novoX][novoY] = salas[novoX][novoY].prioridade();
+		matriz[novoX][novoY] = salas[novoX][novoY].prioridade();
 		return pontuacao;
 	
 	}

@@ -2,11 +2,15 @@ package pt.c40task.l05wumpus;
 
 public class ControleJogo {
 	private Componente heroi;
-	private int pontuacao = 0;
+	private int pontuacao;
 	private String player;
 	private char status;
-	//matriz que vai sendo revelada de acordo com a movimentação do heroi
 	
+	public ControleJogo(String player) {
+		this.player = player;
+		pontuacao = 0;
+		status = 'x';
+	}
 	
     public void conectaHeroi(Componente heroi) {
         this.heroi = heroi;
@@ -38,11 +42,11 @@ public class ControleJogo {
 		
 		System.out.println("Player: " + player);
 		System.out.println("Score: " + String.valueOf(pontuacao));
-		if (status == 'W')
+		if (status == 'w')
 			System.out.println("Parabens! Voce ganhou :)");
-		else if (status == 'L')
+		else if (status == 'n')
 			System.out.println("Ops... Nao foi dessa vez. Voce perdeu :(");
-		else if (status == 'Q')
+		else if (status == 'q')
 			System.out.println("Volte sempre!");
 		else 
 			System.out.println("Continue em frente!");
@@ -70,9 +74,9 @@ public class ControleJogo {
     		int pontuacaoTemporaria = heroi.getCaverna().moverHeroi(antigoX, antigoY ,novoX, novoY);
     		// prestar atencao nas pontuacoes
     		if (pontuacaoTemporaria == 975)
-    			status = 'W';
+    			status = 'w';
     		else if (pontuacaoTemporaria == -1015 || pontuacaoTemporaria == -1115) {
-    			status = 'L';
+    			status = 'n';
     			heroi.setExiste();
     		}
         	pontuacao += pontuacaoTemporaria;
@@ -93,3 +97,6 @@ public class ControleJogo {
 			//tk.writeBoard(tabuleiro, pontuacao, "Volte sempre!");  
 	}
 }
+
+
+

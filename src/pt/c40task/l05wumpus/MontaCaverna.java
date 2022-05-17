@@ -1,12 +1,12 @@
 package pt.c40task.l05wumpus;
 
 public class MontaCaverna {
-	private String[] commands;
+	private String[][] commands;
 	private Caverna caverna;
 	int x, y;
 	char tipo;
 	
-	public MontaCaverna(String[] commands) {
+	public MontaCaverna(String[][] commands) {
 		this.commands = commands;
 		caverna = new Caverna();
 	}
@@ -50,17 +50,6 @@ public class MontaCaverna {
 		}		
 				
 		if (caverna.ehValida(x,y)) { 
-			//hierarquia das aparições na matriz
-			// Ouro = Buraco = Wumpus > Herói > Fedor > Brisa
-			if (caverna.getMatriz()[x][y] != 'W' && caverna.getMatriz()[x][y] != 'O' && caverna.getMatriz()[x][y] != 'B') {
-				if (tipo == 'P')
-					caverna.alteraMatriz(x, y, tipo);
-				else if (tipo == 'f' && caverna.getMatriz()[x][y] != 'P')
-					caverna.alteraMatriz(x, y, tipo);
-				else if (tipo == 'b' && caverna.getMatriz()[x][y] != 'f' && caverna.getMatriz()[x][y] != 'P')
-					caverna.alteraMatriz(x, y, tipo);
-			}
-			
 			componente.conectaCaverna(caverna);
 			componente.getCaverna().conectaComponenteSala(x, y, componente);
 		}
@@ -70,9 +59,9 @@ public class MontaCaverna {
 	public void montar() {
 		for (int i=0 ; i < commands.length ; i++) {
 			//amiga eu já coloquei aqui o x e y com o valor -1, acho q vai dar bommmm n precisa mudar mais nada  boaaa
-			x = Integer.parseInt(commands[i].substring(0, 1))-1;
-			y = Integer.parseInt(commands[i].substring(2, 3))-1;
-			tipo = commands[i].charAt(4);
+			x = Integer.parseInt(commands[i][0]);
+			y = Integer.parseInt(commands[i][1]);
+			tipo = commands[i][2].charAt(0); //conferir 
 			adicionarComponente(x, y, tipo);
 		}	
 		//checar se caverna é valida
