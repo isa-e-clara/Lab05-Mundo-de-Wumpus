@@ -15,6 +15,23 @@ public class Sala {
 		this.ouro = null;	
 	}
 	
+	public char prioridade() {
+		if (buraco != null)
+			return 'B';
+		else if (wumpus != null)
+			return 'W';
+		else if (ouro != null) 
+			return 'O';
+		else if (heroi != null)
+			return 'P';
+		else if (fedor != null)
+			return 'f';
+		else if (brisa != null)
+			return 'b';
+		else
+			return '#';
+	}
+	
 	public Componente getFedor() {
 		return fedor;
 	}
@@ -42,6 +59,14 @@ public class Sala {
 	public void conectaHeroi(Componente heroi) {
         this.heroi = heroi;
     }
+	
+	public Componente getHeroi() {
+		return heroi;
+	}
+	
+	public void setHeroi(Componente heroi) {
+		this.heroi = heroi;
+	}
 	
 	public void conectaFedor(Componente fedor) {
         this.fedor = fedor;

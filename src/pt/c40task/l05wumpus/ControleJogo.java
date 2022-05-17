@@ -6,10 +6,7 @@ public class ControleJogo {
 	private String player;
 	private char status;
 	//matriz que vai sendo revelada de acordo com a movimentação do heroi
-	private char[][] tabuleiro = {{'p', '-', '-', '-'}, 
-			   				      {'-', '-', '-', '-'},
-			   				      {'-', '-', '-', '-'},
-			   				      {'-', '-', '-', '-'}};
+	
 	
     public void conectaHeroi(Componente heroi) {
         this.heroi = heroi;
@@ -34,16 +31,23 @@ public class ControleJogo {
 	public void mover(char move) {
 		int novoX = heroi.getX(), novoY = heroi.getY();
         if(move == 'd')
-            novoX++;
-        else if(move == 'a')
-            novoX--;
-        else if(move == 'w')
-            novoY--;
-        else //(move == 's')
             novoY++;
+        else if(move == 'a')
+            novoY--;
+        else if(move == 'w')
+            novoX--;
+        else //(move == 's')
+            novoX++;
         
         if(heroi.getCaverna().ehValida(novoX, novoY)) {
-        	heroi.getCaverna().moverHeroi();
+        	int antigoX = heroi.getX(), antigoY = heroi.getY();
+        	heroi.getCaverna().getSala(heroi.getX(), heroi.getY()).setHeroi(null);
+        	heroi.setX(novoX);
+    		heroi.setX(novoY);
+    		
+    		heroi.getCaverna().getSala(heroi.getX(), heroi.getY()).setHeroi(heroi);
+    		
+        	heroi.getCaverna().moverHeroi(antigoX, antigoY ,novoX, novoY);;
         	pontuacao -= 15; //- 15 pontos para cada movimento do herói na caverna;
         }
 	}
@@ -52,9 +56,11 @@ public class ControleJogo {
 		if(letra == 'd' || letra == 'a' || letra == 'w' || letra == 's')
 			mover(letra);
 		else if(letra == 'k') //o heroi equipa a flecha
-			heroi.getCaverna().equipar();
+			heroi.getCaverna().equipar(heroi.getX(), heroi.getY());
 		else if(letra == 'c') //o heroi captura o ouro
 			heroi.getCaverna().capturarOuro(heroi.getX(), heroi.getY());
+		else
+			System.out.println("Esse controle nao eh valido :(");
 		//else if(letra == 'q') //o usuario sai do jogo  -> colocar essa parte no AppWumpus.java
 			//tk.writeBoard(tabuleiro, pontuacao, "Volte sempre!");  
 	}

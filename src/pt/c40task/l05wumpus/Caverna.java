@@ -4,15 +4,24 @@ public class Caverna {
 	private int nBuracos, nWumpus, nOuro, nHeroi;
 	private boolean estaEquipada, podeSair;
 	private Sala[][] salas;
+	private int pontuacao = 0;
 	//private Heroi heroi;
 	//matriz pronta com todos os elementos da caverna 
+	//gabarito, tem todas as posições de todos os componentes, menos do 
 	private char[][] matriz = {{'-', '-', '-', '-'}, 
 							   {'-', '-', '-', '-'},
 							   {'-', '-', '-', '-'},
 							   {'-', '-', '-', '-'}};
+	//matriz que vau sendo revelada a medida que o jogador joga
+	private char[][] tabuleiro = {{'P', '-', '-', '-'}, 
+			      				  {'-', '-', '-', '-'},
+			      				  {'-', '-', '-', '-'},
+			      				  {'-', '-', '-', '-'}};
 	
-
-	public int getnBuracos() {
+	public Sala getSala(int x, int y) {
+		return salas[x][y];
+	}
+	public int getnBuracos() { 
 		return nBuracos;
 	}
 
@@ -63,9 +72,15 @@ public class Caverna {
 		this.podeSair = podeSair;
 	}
 
-	public void equipar() {
-		estaEquipada = true;
+	public void equipar(int x, int y) {
+		if (salas[x][y].getHeroi().getArtefato()) {
+			estaEquipada = true;
+			System.out.println("Flecha equipada!");
+		}
+		else
+			System.out.println("Você já usou sua flecha :(");
 	}
+	
 	
 	public void conectaComponenteSala(int x, int y, Componente componente) {
 		char tipo = componente.getTipo();
@@ -110,11 +125,29 @@ public class Caverna {
 			podeSair = true; //se coletar o ouro, o heroi pode sair
 			salas[x][y].setOuro(null); //o ouro deixa de existir
 			salas[x][y].getOuro().existe = false; //o ouro deixa de existir
+			matriz[x][y] = '-';
 		}	
 	}
 	
-	public void moverHeroi() {
-		//tem que fazer 
+	public void moverHeroi(int antigoX, int antigoY, int novoX, int novoY) {
+		char componenteSalaNova = salas[novoX][novoY].prioridade();
+		
+		pontuacao -= 15; //- 15 pontos para cada movimento do herói na caverna;
+
+		tabuleiro[antigoX][antigoY] = salas[antigoX][antigoY].prioridade();
+		//matar o wumpus aqui ou morrer cair no buraco
+		if(componenteSalaNova == 'W') {
+			
+		} else {
+			if(estaEquipada) {
+				salas[novoX][novoY].getHeroi().usouArtefato();	
+				
+			}
+				
+		}
+		
+		
+		//tabuleiro[novoX][novoY] = 
 	}
 	
 }
