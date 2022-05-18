@@ -157,10 +157,11 @@ public class Caverna {
 					salas[novoX][novoY].getWumpus().existe = false; //o wumpus deixa de existir
 					salas[novoX][novoY].setWumpus(null); //o wumpus deixa de existir
 					tiraAoRedor(novoX, novoY); //tira o fedor do wumpus
-					System.out.println("O Wumpus morreu!!!!!");
+					System.out.println("O Wumpus morreu!!!!! Parabens heroi ;)");
 					
 				} else { //morreu
 					pontuacao -= 1000;
+					System.out.println("Que azar! Voce atirou pro lado errado e o Wumpus te matou.");
 				}
 				pontuacao -= 100; //por ter atirado
 				salas[novoX][novoY].getHeroi().usouArtefato();	
@@ -168,24 +169,35 @@ public class Caverna {
 				
 			} else {
 				pontuacao -= 1000; //se  o heroi não tiver equipado a flecha, morre direto
+				System.out.println("O Wumpus te matou! Cade a sua flecha, heroi?");
 			}
 			
 				
 		} else {
 			if(estaEquipada) { //está equipada e não encontrou o Wumpus
+				System.out.println("Voce atirou!..... Mas nao tinha nenhum monstro na sala"); 
 				salas[novoX][novoY].getHeroi().usouArtefato();	
 				estaEquipada = false;
 				pontuacao -= 100;	
 			}
 			if(componenteSalaNova == 'B') { //se for um buraco
+				System.out.println("AAAAAAhhh, eh tao fundo! Voce caiu no buraco");
 				pontuacao -= 1000;
 			}
 	
 		}
-		if (salas[novoX][novoY].getFedor() != null) //entrou numa sala com fedor 
-			System.out.println("Hmmmm... Que cheiro ruim!");
-		if (salas[novoX][novoY].getBrisa() != null) //entrou numa sala com brisa
+		if (salas[novoX][novoY].getFedor() != null) {//entrou numa sala com fedor 
+			System.out.println( "Hmmmm... Que cheiro ruim!");
+			System.out.println();
+		}
+		if (salas[novoX][novoY].getBrisa() != null) { //entrou numa sala com brisa
 			System.out.println("Estou sentindo uma brisa...");
+			System.out.println();
+		}
+		if (salas[novoX][novoY].getOuro() != null) { //entrou numa sala com ouro
+			System.out.println("Tenho que capturar o ouro!");
+			System.out.println(); 
+		}
 
 	
 		matriz[novoX][novoY] = salas[novoX][novoY].prioridade();

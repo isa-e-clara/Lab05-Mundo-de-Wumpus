@@ -55,7 +55,7 @@ public class ControleJogo {
 		else if (status == 'n')
 			System.out.println("Ops... Nao foi dessa vez. Voce perdeu :(");
 		else if (status == 'q')
-			System.out.println("Volte sempre!");
+			System.out.println("Volte sempre!!!");
 		else 
 			System.out.println("Continue em frente!");
 		
