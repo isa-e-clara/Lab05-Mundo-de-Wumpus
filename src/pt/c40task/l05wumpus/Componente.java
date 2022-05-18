@@ -61,6 +61,4 @@ public class Componente {
 		return tipo;
 	}
 	
-	//a classe componente nao precisa ter atributo, so os metodos (que recuperam os atributos)
-	
 }

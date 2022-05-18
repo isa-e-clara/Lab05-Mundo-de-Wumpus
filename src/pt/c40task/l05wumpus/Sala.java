@@ -85,16 +85,30 @@ public class Sala {
     }
 	
 	public void conectaWumpus(Componente wumpus) {
-        this.wumpus = wumpus;
+		if(ouro == null && buraco == null)
+			this.wumpus = wumpus;
+		else {
+			System.out.println("Nao se pode adicionar esse componente nessa sala!");
+			System.exit(1);
+		}
     }
 	
 	public void conectaBuraco(Componente buraco) {
-        this.buraco = buraco;
+		if(ouro == null && wumpus == null)
+			this.buraco = buraco;
+		else {
+			System.out.println("Nao se pode adicionar esse componente nessa sala!");
+			System.exit(1);
+		}
     }
 	
 	public void conectaOuro(Componente ouro) {
-        this.ouro = ouro;
+		if(buraco == null && wumpus == null)
+			this.ouro = ouro;
+        else {
+        	System.out.println("Nao se pode adicionar esse componente nessa sala!");
+        	System.exit(1);
+        }
     }
-
 	
 }

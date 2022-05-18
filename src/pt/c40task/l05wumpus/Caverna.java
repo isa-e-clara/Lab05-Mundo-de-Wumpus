@@ -10,10 +10,20 @@ public class Caverna {
 							   {'-', '-', '-', '-'},
 							   {'-', '-', '-', '-'}};
 
+	public Caverna() {
+		salas = new Sala[4][4];
+		nBuracos = nWumpus = nOuro = nHeroi = 0;
+		estaEquipada = false; //inicialmente a flecha nao esta equipada
+		podeSair = false; //o heroi so pode sair da caverna se pegar o ouro
+		for(int i = 0; i < 4; i++)
+			for(int j = 0; j < 4; j++)
+				salas[i][j] = new Sala(i, j);
+	}
 	
 	public Sala getSala(int x, int y) {
 		return salas[x][y];
 	}
+	
 	public int getnBuracos() { 
 		return nBuracos;
 	}
@@ -46,17 +56,6 @@ public class Caverna {
 		this.nHeroi = nHeroi;
 	}
 	
-	
-	public Caverna() {
-		salas = new Sala[4][4];
-		nBuracos = nWumpus = nOuro = nHeroi = 0;
-		estaEquipada = false; //inicialmente a flecha nao esta equipada
-		podeSair = false; //o heroi so pode sair da caverna se pegar o ouro
-		for(int i = 0; i < 4; i++)
-			for(int j = 0; j < 4; j++)
-				salas[i][j] = new Sala(i, j);
-	}
-	
 	public boolean getPodeSair() {
 		return podeSair;
 	}
@@ -65,6 +64,7 @@ public class Caverna {
 		this.podeSair = podeSair;
 	}
 
+	/* Equipa a flecha do heroi quando possivel. */
 	public void equipar(int x, int y) {
 		if (salas[x][y].getHeroi().getArtefato()) {
 			estaEquipada = true;
@@ -74,10 +74,10 @@ public class Caverna {
 			System.out.println("Você já usou sua flecha :(");
 	}
 	
-	
+	/* Conecta o componente com a sala[x][y]. */
 	public void conectaComponenteSala(int x, int y, Componente componente) {
 		char tipo = componente.getTipo();
-		if(tipo == 'P') {//ao inves de varios if da pra criar um metodo pra cada
+		if(tipo == 'P') {
 			salas[x][y].conectaHeroi(componente);
 		} else if(tipo == 'B') {
 			salas[x][y].conectaBuraco(componente);
@@ -92,26 +92,28 @@ public class Caverna {
 		}
 	}
 	
+	/* Checa se eh uma caverna valida. */
 	public boolean cavernaValida() {
 		if ((nBuracos == 2 || nBuracos == 3) && nWumpus == 1 && nOuro == 1 && nHeroi == 1)
 			return true;
 		return false;
 	}
 	
+	/* Checa se eh uma posição valida da caverna. */
 	public boolean ehValida(int x, int y) {
-		//checa se eh uma posição valida da caverna
 		if (x < 4 && x > -1 && y < 4 && y > -1)
 			return true;
 		return false;
 	}
 
-	public void tiraFedor (int x, int y) { //tira o fedor
+	public void tiraFedor (int x, int y) { 
 		if (ehValida(x,y)) {
 			salas[x][y].getFedor().existe = false;
 			salas[x][y].setFedor(null); 
 		}
 	}
 	
+	/* Retira o fedor das celulas adjacentes de (x,y) quando possivel. */
 	public void tiraAoRedor(int x, int y) {
 		tiraFedor(x+1, y);
 		tiraFedor(x-1, y);
@@ -127,31 +129,29 @@ public class Caverna {
 		return matriz;
 	}
 	
-	public void capturarOuro(int x, int y) { //nao acho q faz mt sentido isso estar na caverna, mas n sabia mais onde por kkkkk
+	public void capturarOuro(int x, int y) { 
 		if(salas[x][y].getOuro() != null) {
 			podeSair = true; //se coletar o ouro, o heroi pode sair
 			salas[x][y].getOuro().existe = false; //o ouro deixa de existir
 			salas[x][y].setOuro(null); //o ouro deixa de existir
-			matriz[x][y] = salas[x][y].prioridade();
+			matriz[x][y] = salas[x][y].prioridade(); //atualizando a matriz que vai ser impressa 
 			System.out.println("Ouro capturado :)");
 		}	
 	}
 	
 	public int moverHeroi(int antigoX, int antigoY, int novoX, int novoY) {
 		char componenteSalaNova = salas[novoX][novoY].prioridade();
-		int pontuacao = 0;
-		pontuacao -= 15; //- 15 pontos para cada movimento do herói na caverna;
 		Random rand = new Random();
-	
-		matriz[antigoX][antigoY] = salas[antigoX][antigoY].prioridade(); //reescrevendo a sala da qual o heroi saiu
+		int pontuacao = 0;
+		
+		pontuacao -= 15; //- 15 pontos para cada movimento do herói na caverna
 		
 		if(novoX == 0 && novoY == 0 && podeSair) {  //ganhou!
 			pontuacao += 1000;
-		} else if(componenteSalaNova == 'W') { //encontrou com o Wumpus
 			
+		} else if(componenteSalaNova == 'W') { //encontrou com o Wumpus
 			if(estaEquipada) { //atirou
 				int aleatorio = rand.nextInt(2);
-				
 				if (aleatorio == 1) { //matou
 					pontuacao += 500;
 					salas[novoX][novoY].getWumpus().existe = false; //o wumpus deixa de existir
@@ -199,8 +199,8 @@ public class Caverna {
 			System.out.println(); 
 		}
 
-	
-		matriz[novoX][novoY] = salas[novoX][novoY].prioridade();
+		matriz[antigoX][antigoY] = salas[antigoX][antigoY].prioridade(); //reescrevendo a sala da qual o heroi saiu
+		matriz[novoX][novoY] = salas[novoX][novoY].prioridade(); //atualizando a matriz que vai ser impressa 
 		return pontuacao;
 	
 	}
