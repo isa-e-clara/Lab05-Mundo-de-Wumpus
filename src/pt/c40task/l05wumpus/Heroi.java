@@ -4,6 +4,10 @@ public class Heroi extends Componente {
 	
 	public Heroi(int x, int y) {
 		super(x, y, 'P');
+		super.temArtefato = true;
+	}
+	public void usouArtefato() {
+		temArtefato = false;
 	}
 
 }

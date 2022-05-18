@@ -56,6 +56,10 @@ public class Caverna {
 		this.nHeroi = nHeroi;
 	}
 	
+	public boolean getestaEquipada() {
+		return estaEquipada;
+	}
+	
 	public boolean getPodeSair() {
 		return podeSair;
 	}

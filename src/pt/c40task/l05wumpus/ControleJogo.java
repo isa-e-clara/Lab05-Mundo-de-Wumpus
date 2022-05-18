@@ -97,8 +97,13 @@ public class ControleJogo {
 	}
 	
 	public void acao(char letra) {
-		if(letra == 'd' || letra == 'a' || letra == 'w' || letra == 's') //o heroi se movimenta
+		if(letra == 'd' || letra == 'a' || letra == 'w' || letra == 's') {//o heroi se movimenta 
+			
 			mover(letra);
+			if (heroi.getCaverna().getestaEquipada())
+				System.out.println("Flecha equipada!");
+			
+		}
 		else if(letra == 'k') //o heroi equipa a flecha
 			heroi.getCaverna().equipar(heroi.getX(), heroi.getY());
 		else if(letra == 'c') //o heroi captura o ouro

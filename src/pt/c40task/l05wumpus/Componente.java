@@ -11,10 +11,7 @@ public class Componente {
 		this.y = y;
 		this.tipo = tipo;
 		this.existe = true; //se esta criando um componente é pq ele existe (pelo menos ate o momento)
-		if(tipo == 'P') //heroi
-			this.temArtefato = true; //o jogo começa com o heroi tendo uma flecha
-		else
-			this.temArtefato = false;
+		this.temArtefato = false;
 	}
 	
 	public Caverna getCaverna() {
@@ -41,9 +38,7 @@ public class Componente {
 		this.caverna = caverna;
 	}
 	
-	public void usouArtefato() {
-		temArtefato = false;
-	}
+	public void usouArtefato() {}
 	
 	public boolean getArtefato() {
 		return temArtefato;
