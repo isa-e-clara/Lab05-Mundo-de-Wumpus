@@ -18,19 +18,24 @@ public class AppWumpus {
       ControleJogo controle = new ControleJogo("Alcebiades");
       MontaCaverna montador = new MontaCaverna(cave);
       montador.montar();
-      controle.conectaHeroi(montador.getCaverna().getSala(0, 0).getHeroi());
+      if(montador.estaValido()) {
+	      controle.conectaHeroi(montador.getCaverna().getSala(0, 0).getHeroi());
+	 
+	      String movements = tk.retrieveMovements();
+	      controle.imprime();
+	      tk.writeBoard(controle.getHeroi().getCaverna().getMatriz(), controle.getPontuacao(), controle.getStatus());
+	      for(int i = 0; i < movements.length(); i++) {
+	    	  if(controle.getStatus() == 'x') {
+	    		  controle.acao(movements.charAt(i));
+	    		  controle.imprime();
+	    		  tk.writeBoard(controle.getHeroi().getCaverna().getMatriz(), controle.getPontuacao(), controle.getStatus());
+	    	  } else //se ganhou, perdeu ou desistiu
+	    		  break;
+	      }
+	      
+      } else
+    	  System.out.println("Caverna invalida!");
 
-      
-      String movements = tk.retrieveMovements();
-      System.out.println("=== Movimentos");
-      System.out.println(movements);
-      
-      System.out.println("=== Caverna Intermediaria");
-
-      //tk.writeBoard(partialCave, score, status);
-
-
-      
       tk.stop();
    }
 

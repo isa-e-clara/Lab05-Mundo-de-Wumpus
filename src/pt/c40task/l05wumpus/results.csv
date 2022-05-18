@@ -1,13 +1,118 @@
-##b-
-#b--
-b---
-p---
-score: -120
+P---
+----
+----
+----
+score: 0
+status: x
+=====
+#P--
+----
+----
+----
+score: -15
+status: x
+=====
+##P-
+----
+----
+----
+score: -30
 status: x
 =====
 ##b-
-#b#f
-b--w
-#---
-score: -1210
-status: n
+--P-
+----
+----
+score: -45
+status: x
+=====
+##b-
+--#P
+----
+----
+score: -60
+status: x
+=====
+##b-
+--#P
+----
+----
+score: -60
+status: x
+=====
+##b-
+--#f
+---P
+----
+score: 325
+status: x
+=====
+##b-
+--#f
+---#
+---P
+score: 310
+status: x
+=====
+##b-
+--#f
+---#
+--O#
+score: 295
+status: x
+=====
+##b-
+--#f
+---#
+--P#
+score: 295
+status: x
+=====
+##b-
+--#f
+---#
+-P##
+score: 280
+status: x
+=====
+##b-
+--#f
+---#
+Pb##
+score: 265
+status: x
+=====
+##b-
+--#f
+P--#
+#b##
+score: 250
+status: x
+=====
+##b-
+--#f
+P--#
+#b##
+score: 250
+status: x
+=====
+##b-
+P-#f
+b--#
+#b##
+score: 235
+status: x
+=====
+##b-
+P-#f
+b--#
+#b##
+score: 235
+status: x
+=====
+P#b-
+#-#f
+b--#
+#b##
+score: 1220
+status: w

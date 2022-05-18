@@ -15,11 +15,15 @@ public class ControleJogo {
     public void conectaHeroi(Componente heroi) {
         this.heroi = heroi;
     }
-	
+
 	public void setPlayer (String player) {
 		this.player = player;
 	}
 	
+	public int getPontuacao() {
+		return pontuacao;
+	}
+
 	public String getPlayer () {
 		return player;
 	}
@@ -28,11 +32,15 @@ public class ControleJogo {
 		this.status = status;
 	}
 	
-	public char getstatus () {
+	public char getStatus () {
 		return status;
 	}
 	
-	public void imprime(String player) {
+	public Componente getHeroi() {
+		return heroi;
+	}
+
+	public void imprime() {
 		char[][] matriz = heroi.getCaverna().getMatriz();
 		for (int i=0; i<matriz.length;i++) {
 			for (int j=0;j<matriz[i].length;j++)
@@ -50,6 +58,8 @@ public class ControleJogo {
 			System.out.println("Volte sempre!");
 		else 
 			System.out.println("Continue em frente!");
+		
+		System.out.println();
 	}
 	
 	public void mover(char move) {
@@ -67,13 +77,13 @@ public class ControleJogo {
         	int antigoX = heroi.getX(), antigoY = heroi.getY();
         	heroi.getCaverna().getSala(heroi.getX(), heroi.getY()).setHeroi(null);
         	heroi.setX(novoX);
-    		heroi.setX(novoY);
+    		heroi.setY(novoY);
     		
     		heroi.getCaverna().getSala(heroi.getX(), heroi.getY()).setHeroi(heroi);
     		
     		int pontuacaoTemporaria = heroi.getCaverna().moverHeroi(antigoX, antigoY ,novoX, novoY);
     		// prestar atencao nas pontuacoes
-    		if (pontuacaoTemporaria == 975)
+    		if (pontuacaoTemporaria == 985)
     			status = 'w';
     		else if (pontuacaoTemporaria == -1015 || pontuacaoTemporaria == -1115) {
     			status = 'n';
@@ -91,10 +101,10 @@ public class ControleJogo {
 			heroi.getCaverna().equipar(heroi.getX(), heroi.getY());
 		else if(letra == 'c') //o heroi captura o ouro
 			heroi.getCaverna().capturarOuro(heroi.getX(), heroi.getY());
+		else if(letra == 'q') //desistiu do jogo
+			status = 'q';
 		else
 			System.out.println("Esse controle nao eh valido :(");
-		//else if(letra == 'q') //o usuario sai do jogo  -> colocar essa parte no AppWumpus.java
-			//tk.writeBoard(tabuleiro, pontuacao, "Volte sempre!");  
 	}
 }
 

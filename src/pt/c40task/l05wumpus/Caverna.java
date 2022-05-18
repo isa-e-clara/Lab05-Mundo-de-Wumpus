@@ -5,9 +5,6 @@ public class Caverna {
 	private int nBuracos, nWumpus, nOuro, nHeroi;
 	private boolean estaEquipada, podeSair;
 	private Sala[][] salas;
-	//private Heroi heroi;
-	//matriz pronta com todos os elementos da caverna 
-	//gabarito, tem todas as posições de todos os componentes, menos do 
 	private char[][] matriz = {{'P', '-', '-', '-'}, 
 							   {'-', '-', '-', '-'},
 							   {'-', '-', '-', '-'},
@@ -110,8 +107,8 @@ public class Caverna {
 
 	public void tiraFedor (int x, int y) { //tira o fedor
 		if (ehValida(x,y)) {
-			salas[x][y].setFedor(null); 
 			salas[x][y].getFedor().existe = false;
+			salas[x][y].setFedor(null); 
 		}
 	}
 	
@@ -133,8 +130,9 @@ public class Caverna {
 	public void capturarOuro(int x, int y) { //nao acho q faz mt sentido isso estar na caverna, mas n sabia mais onde por kkkkk
 		if(salas[x][y].getOuro() != null) {
 			podeSair = true; //se coletar o ouro, o heroi pode sair
-			salas[x][y].setOuro(null); //o ouro deixa de existir
 			salas[x][y].getOuro().existe = false; //o ouro deixa de existir
+			salas[x][y].setOuro(null); //o ouro deixa de existir
+			matriz[x][y] = salas[x][y].prioridade();
 			System.out.println("Ouro capturado :)");
 		}	
 	}
@@ -147,18 +145,17 @@ public class Caverna {
 	
 		matriz[antigoX][antigoY] = salas[antigoX][antigoY].prioridade(); //reescrevendo a sala da qual o heroi saiu
 		
-		if(novoX == 1 && novoY == 1 && podeSair)  //ganhou!
+		if(novoX == 0 && novoY == 0 && podeSair) {  //ganhou!
 			pontuacao += 1000;
-		
-		if(componenteSalaNova == 'W') { //encontrou com o Wumpus
+		} else if(componenteSalaNova == 'W') { //encontrou com o Wumpus
 			
 			if(estaEquipada) { //atirou
 				int aleatorio = rand.nextInt(2);
 				
 				if (aleatorio == 1) { //matou
 					pontuacao += 500;
-					salas[novoX][novoY].setWumpus(null); //o wumpus deixa de existir
 					salas[novoX][novoY].getWumpus().existe = false; //o wumpus deixa de existir
+					salas[novoX][novoY].setWumpus(null); //o wumpus deixa de existir
 					tiraAoRedor(novoX, novoY); //tira o fedor do wumpus
 					System.out.println("O Wumpus morreu!!!!!");
 					
@@ -169,8 +166,9 @@ public class Caverna {
 				salas[novoX][novoY].getHeroi().usouArtefato();	
 				estaEquipada = false;
 				
-			} else 
+			} else {
 				pontuacao -= 1000; //se  o heroi não tiver equipado a flecha, morre direto
+			}
 			
 				
 		} else {
@@ -179,8 +177,9 @@ public class Caverna {
 				estaEquipada = false;
 				pontuacao -= 100;	
 			}
-			if(componenteSalaNova == 'B') //se for um buraco
+			if(componenteSalaNova == 'B') { //se for um buraco
 				pontuacao -= 1000;
+			}
 	
 		}
 		if (salas[novoX][novoY].getFedor() != null) //entrou numa sala com fedor 
