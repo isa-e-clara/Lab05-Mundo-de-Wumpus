@@ -23,8 +23,8 @@ public class AppWumpus {
       if(montador.estaValido()) {
 	      controle.conectaHeroi(montador.getCaverna().getSala(0, 0).getHeroi());
 	 
-	      String movements = ""; //descomentar essa linha e comentar a próxima para jogar interativo
-	      //String movements = tk.retrieveMovements();
+	      //String movements = ""; 
+	      String movements = tk.retrieveMovements(); //comentar essa linha e descomentar a anterior para jogar interativo
 	    
 	     if (movements == "") { //modo interativo
 		      System.out.println("Digite o nome do jogador: "); //o jogador digita o nome
@@ -80,7 +80,7 @@ public class AppWumpus {
       } 
       
       else
-		  System.out.println("Caverna invalida!");
+		  System.out.println("Caverna invalida!"); //caverna com menos de dois buracos ou mais de tres ou com mais de um wumpus, heroi ou ouro
       
       tk.stop();
    }

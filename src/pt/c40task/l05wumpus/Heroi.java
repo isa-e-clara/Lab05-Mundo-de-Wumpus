@@ -6,6 +6,7 @@ public class Heroi extends Componente {
 		super(x, y, 'P');
 		super.temArtefato = true;
 	}
+	//só o heroi usa/tem artefato
 	public void usouArtefato() {
 		temArtefato = false;
 	}

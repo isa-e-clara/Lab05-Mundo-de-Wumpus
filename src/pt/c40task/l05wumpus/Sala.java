@@ -15,6 +15,7 @@ public class Sala {
 		this.ouro = null;	
 	}
 	
+	//informa qual a letra que deve ser impressa na matriz de acordo com a prioridade de aparição dos componentes
 	public char prioridade() {
 		if (buraco != null)
 			return 'B';
