@@ -1,5 +1,6 @@
 # Lab05-Mundo-de-Wumpus
 
+## Descrição
 Trata-se de um jogo interativo em que o herói se movimenta pela caverna com o objetivo de capturar o ouro. Ganha-se o jogo se você conseguir capturar o ouro e sair da caverna (mesma posição da entrada) sem morrer. Há dois casos em que o herói morre: caindo em um buraco ou sendo morto pelo Wumpus. Existem pistas se você estiver próximo de um buraco ou do wumpus, você sente uma brisa e um fedor respectivamente. O herói também possui uma única flecha, a qual dá a ele a chance de matar o Wumpus, caso o encontre. Os comandos de movimento são:
 
 - w -> Herói movimenta para a sala acima;
