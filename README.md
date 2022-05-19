@@ -16,7 +16,8 @@ Quando a ação equipa flecha é selecionada, significa que no próximo moviment
 ## Resolução da tarefa
 
 [Diretório com os arquivos .java](src/pt/c40task/l05wumpus)
-[Destaques decisões de arquitetura](destaque.md)
+
+[Destaques decisões de arquitetura](destaques.md)
 
 # MC322
 
