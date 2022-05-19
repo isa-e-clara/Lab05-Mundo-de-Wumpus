@@ -12,6 +12,10 @@ Trata-se de um jogo interativo em que o herói se movimenta pela caverna com o o
 
 Quando a ação equipa flecha é selecionada, significa que no próximo movimento a flecha será disparada automaticamente, independentemente do que houver na sala.
 
+## Resolução da tarefa
+
+[Diretório com os arquivos .java](src/pt/c40task/l05wumpus)
+
 # MC322
 
 # Aluno
